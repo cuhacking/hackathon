@@ -2,11 +2,11 @@
   "name": "hackathon",
   "type": "module",
   "version": "0.1.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/cuhacking/hackathon.git"
   },
-  "private": true,
   "scripts": {
     "build": "next build",
     "db:generate": "prisma migrate dev",

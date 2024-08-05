@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import rehypeMermaid from 'rehype-mermaid'
 
-await import('./src/env.js')
+// await import('./src/env.js')
 
 const withMDX = createMDX({
   rootContentPath: './src/content',
@@ -30,7 +30,7 @@ const withMDX = createMDX({
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  output: 'standalone',
+  // output: 'standalone',
 }
 
 export default withMDX(config)
