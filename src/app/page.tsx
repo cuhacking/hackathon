@@ -1,8 +1,13 @@
 import Link from 'next/link'
 
-import { UserProfile } from '~/app/_components/userProfile/UserProfile'
-import { getServerAuthSession } from '~/server/auth'
-import { HydrateClient, api } from '~/trpc/server'
+import { LatestPost } from "~/app/_components/post";
+import { getServerAuthSession } from "~/server/auth";
+import { api, HydrateClient } from "~/trpc/server";
+
+// Components
+import { UserProfile } from "./_components/userProfile/UserProfile";
+import { SignInButton }  from "~/app/_components/NextAuth/SignInButton";
+import { SignOutButton }  from "~/app/_components/NextAuth/SignOutButton";
 
 export default async function Home() {
   const session = await getServerAuthSession()
@@ -22,11 +27,7 @@ export default async function Home() {
           <code>next-auth</code>
           !
         </p>
-        <p>
-          <Link href="/api/auth/signin">Sign in</Link>
-          {' '}
-          to see the latest post.
-        </p>
+        <SignInButton/>
       </div>
     )
   }
@@ -41,6 +42,7 @@ export default async function Home() {
           !
         </p>
         <UserProfile session={session} />
+        <SignOutButton/>
       </div>
     </HydrateClient>
   )
