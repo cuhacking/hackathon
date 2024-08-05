@@ -49,11 +49,12 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts",
+    "hacker-portal/.next/types/**/*.ts",
     "postcss.config.cjs",
     "next.config.mjs",
     ".map.ts",
-    "eslint.config.mjs"
+    "eslint.config.mjs",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
