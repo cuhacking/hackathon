@@ -21,6 +21,12 @@ importers:
         specifier: ^2.3.0
         version: 2.6.3
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^2.1.1
+        version: 2.1.4
+      '@eslint/js':
+        specifier: ~8.57.0
+        version: 8.57.0
       '@nx/devkit':
         specifier: 19.5.6
         version: 19.5.6(nx@19.5.6(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.5.29(@swc/helpers@0.5.12)))
