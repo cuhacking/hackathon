@@ -1,20 +1,52 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "incremental": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "target": "es2022",
+    "jsx": "preserve",
+    "module": "ESNext",
+    /* Bundled projects */
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2022"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    /* Base Options: */
+    "esModuleInterop": true,
+    "isolatedModules": true,
   },
-  "exclude": ["node_modules", "tmp"]
+  "include": [
+    ".eslintrc.cjs",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+    "hacker-portal/.next/types/**/*.ts",
+    "postcss.config.cjs",
+    "next.config.mjs",
+    ".map.ts",
+    "eslint.config.mjs",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

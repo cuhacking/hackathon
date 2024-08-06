@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'hacker-portal',
   preset: '../../jest.preset.js',
