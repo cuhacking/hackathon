@@ -31,6 +31,15 @@ const withMDX = createMDX({
 const config = {
   reactStrictMode: true,
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/t/j/:teamId',
+        destination: '/teams/join/:teamId',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default withMDX(config)

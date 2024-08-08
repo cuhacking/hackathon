@@ -1,5 +1,6 @@
+import { randomBytes } from 'node:crypto'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import type { User as PrismaUser, UserInformation } from '@prisma/client'
+import type { User as PrismaUser, Team, UserInformation } from '@prisma/client'
 import {
   type DefaultSession,
   type NextAuthOptions,
@@ -9,6 +10,7 @@ import {
 import type { Adapter } from 'next-auth/adapters'
 import GoogleProvider from 'next-auth/providers/google'
 
+import { TRPCError } from '@trpc/server'
 import { env } from '~/env'
 import { db } from '~/server/db'
 
@@ -28,9 +30,9 @@ declare module 'next-auth' {
     PrismaUser
   }
 
-  interface User {
-    // ...other properties
-  }
+  // interface User {
+  //   // ...other properties
+  // }
 }
 
 function getFirstNameAndLastName(name: string): { firstName: string, lastName: string } {
@@ -55,39 +57,59 @@ function getFirstNameAndLastName(name: string): { firstName: string, lastName: s
   }
 }
 
+function generateRandomString(length: number): string {
+  return randomBytes(length).toString('hex').slice(0, length)
+}
+
 async function createUserEventHandler(message: { user: User }) {
   const { user } = message
 
-  if (!user.name)
-    return
+  if (!user.email || !user.name) {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: `Could not retrieve user name or email`,
+    })
+  }
+
   const { firstName, lastName } = getFirstNameAndLastName(user.name)
 
-  if (!user.email)
-    return
+  // create a Team object for the user
+  const team: Team = {
+    id: generateRandomString(5),
+    name: `${firstName}\'s team`,
+    ownerId: user.id,
+    usersIds: [user.id],
+  }
 
   // create a default UserInformation object with all values set to null
   const userInformation: UserInformation = {
-    email: user.email,
     id: user.id,
+    email: user.email,
     first_name: firstName,
     last_name: lastName,
+    gender: null,
     school: null,
     major: null,
     date_of_birth: null,
     phone_number: null,
     levels_of_study: null,
     userId: user.id,
+    ownedTeamId: team.id,
+    teamId: team.id,
   }
 
-  await db.userInformation.create({
-    data: {
-      ...userInformation,
-      user: {
-        connect: {
-          id: user.id,
-        },
+  await db.$transaction(async (prisma) => {
+    await prisma.team.create({
+      data: {
+        ...team,
       },
-    },
+    })
+
+    await prisma.userInformation.create({
+      data: {
+        ...userInformation,
+      },
+    })
   })
 }
 
