@@ -1,6 +1,356 @@
 ---
-title: Hack the Tunnels 2024
+title: Hack the Tunnels 2024 - Git Workshop
 ---
 
-cuHacking's Git Workshop @ [CCSS](https://ccss.carleton.ca) [Hack the Tunnels](https://ccss.carleton.ca/hackthetunnels/).
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 
+Welcome to cuHacking's Git Workshop at [Hack the Tunnels](https://ccss.carleton.ca/hackthetunnels/), hosted by [CCSS](https://ccss.carleton.ca).
+
+
+
+
+
+<h3> 📚 What you'll learn </h3>
+
+<Cards>
+<Card
+  title={"Git"}
+  description={
+    <>
+      <li>Basic Git Commands</li>
+      <li>Version Control Best Practices</li>
+    </>
+  }
+  href={`https://git-scm.com`}
+  icon={
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+      alt="Git Logo"
+      width={24}
+      height={24}
+    />
+  }
+/>
+
+<Card
+  title={"GitHub"}
+  description={
+    <>
+      <li>Repositories and Branches</li>
+      <li>Collaboration via Pull Requests</li>
+    </>
+  }
+  href={`https://github.com`}
+  icon={
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      alt="GitHub Logo"
+      width={24}
+      height={24}
+    />
+  }
+/>
+
+<Card
+  title={"Bash"}
+  description={
+    <>
+      <li>Abbreviation for 'Bourne Again Shell'</li>
+      <li>Default shell for Linux</li>
+    </>
+  }
+  href={`https://www.gnu.org/software/bash/`}
+  icon={
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+      alt="Bash Logo"
+      width={24}
+      height={24}
+    />
+  }
+/>
+
+<Card
+  title={"Linux"}
+  description={
+    <>
+      <li>Kernel on top of which Unix-like operating systems are created, such as Ubuntu, Fedora, Arch etc.</li>
+    </>
+  }
+  href={`https://en.wikipedia.org/wiki/Linux`}
+  icon={
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg"
+      alt="Linux Logo"
+      width={24}
+      height={24}
+    />
+  }
+/>
+</Cards>
+
+<Callout type="warn" title="Please ensure that your setup is complete before proceeding.">
+  <Accordions>
+    <Accordion title="Additional steps for Windows Users">
+      ### Install Windows Subsystem for Linux (WSL)
+
+      <Accordions>
+        <Accordion title="What is WSL?">
+          [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) allows you to use Linux on Windows.
+        </Accordion>
+      </Accordions>
+
+      <div className="steps">
+        <div className="step">
+          Open PowerShell as Administrator and run the command:
+          ```sh title="Terminal"
+          wsl --install # Will install WSL2 by default
+          ```
+        </div>
+        <div className="step">
+          Choose Ubuntu as your Linux distribution.
+        </div>
+        <div className="step">
+          Create your UNIX account.
+          <Callout title="Keep your password short and simple for now, you'll need to type it often to install packages.">
+          </Callout>
+          <Callout type="warn" title="Don't forget your UNIX username & password">
+          Otherwise you'll be locked out and will have to re-install WSL.
+          </Callout>
+        </div>
+      </div>
+    </Accordion>
+
+  <Accordion title="Review System Requirements">
+    <div className="steps">
+      <div className="step">
+    ### Install [Homebrew](https://brew.sh)
+    Homebrew is a package manager for that simplifies installing software, and works on both MacOS and Linux.
+    ```sh title="Terminal"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+
+        Follow the on-screen instructions to add Homebrew to your `PATH`.
+      </div>
+
+      <div className="step">
+      ### Install [Git](https://git-scm.com)
+    ```sh title="Terminal"
+    brew install git
+    ```
+
+      <div className="step">
+### Configure Git
+
+Your username and email will be used to identify you in the Git commit history.
+    ```sh title="Terminal"
+    # Set your username
+git config --global user.name "Your Name"
+    ```
+
+    ```sh title="Terminal"
+    # Set your email
+git config --global user.email "your_email@example.com"
+    ```
+
+    Git's default branch is `master`, let's change it to `main` to match the convention used by GitHub.
+    ```sh title="Terminal"
+    # Set the default branch to main
+git config --global init.defaultBranch main
+    ```
+
+      </div>
+      </div>
+
+      <div className="step">
+
+    ### Install GitHub CLI
+
+This simplifies GitHub tasks like cloning repositories, and authentication without needing to copy-paste URLs.
+```sh title="Terminal"
+brew install gh
+```
+
+Login with your GitHub account, use HTTPS.
+```sh title="Terminal"
+gh auth login
+```
+      </div>
+      </div>
+
+  </Accordion>
+</Accordions>
+
+</Callout>
+
+<Callout type="warn" title="Git and GitHub are different things">
+     Git is the tool that manages code history, while GitHub is a cloud platform for storing and sharing repositories.
+     - Like what Microsoft Word is to Onedrive, or Google Docs is to Google Drive.
+</Callout>
+
+<Callout title="For a smooth workshop experience, changing the commands is not recommended, unless you're an experienced user.">
+</Callout>
+
+This workshop will be split into three parts.
+
+Part 1 will be having fun with Linux and Bash to automate things.
+Part 2 will be using Git to track changes to your script.
+Part 3 will be using GitHub to share your code with others.
+
+
+    <div className="steps">
+      <div className="step">
+### Check Your Setup
+
+Confirm that your setup is correct by running these commands.
+
+```sh title="Terminal"
+# Check Homebrew installation
+brew --version
+
+# Check Git version
+git --version
+
+# Confirm GitHub CLI installation
+gh --version
+
+# Verify global Git config
+git config --list
+```
+
+If everything is working correctly, you should see the relevant version numbers and configuration details.
+
+<Callout title="Notes">
+- The term `directory` means the same thing as folder.
+- The `~` symbol represents the home directory in both Linux and Unix (MacOS is UNIX).
+- Everything in Linux is a file.
+- Every command begins with a program name.
+- You can learn more about the program using the `man` program.
+
+Try the following:
+```sh title="Terminal"
+man cd
+```
+Press `q` to quit. You can put almost any program after the `man` command to learn more about it. You can even do `man man`.
+</Callout>
+
+
+</div>
+      <div className="step">
+        ### Go to the home directory.
+        To move between directories, we use the `cd` command.
+        ```sh title="Terminal"
+        cd ~
+        ```
+        `cd` means 'change directory'.
+</div>
+
+      <div className="step">
+        ### Make a directory called `workspace`.
+        To create directories, we use the `mkdir` command.
+        ```sh title="Terminal"
+        mkdir workspace
+        ```
+ `mkdir` means (make directory) command.
+</div>
+
+      <div className="step">
+        ### Go into the `workspace` directory.
+        ```sh title="Terminal"
+        cd workspace
+        ```
+</div>
+
+      <div className="step">
+        ```sh title="Terminal"
+        mkdir hack-the-tunnels-git-workshop
+        ```
+
+</div>
+
+      <div className="step">
+        ### Go into the `hack-the-tunnels-git-workshop` directory.
+        ```sh title="Terminal"
+cd hack-the-tunnels-git-workshop
+        ```
+</div>
+
+      <div className="step">
+        ### Create a file
+        ```sh title="Terminal"
+        touch file.sh
+        ```
+</div>
+
+      <div className="step">
+        ```sh title="Terminal"
+        touch file.sh
+        ```
+</div>
+    </div>
+
+<Callout title="Tip">
+Using lowercase letters and hyphens with no spaces for file and folder names will make script automation much easier.
+</Callout>
+
+First, we'll use this [Git Visualizer](https://git-school.github.io/visualizing-git/#free) to better understand how Git commands work.
+
+### Turn the current directory into a Git repository
+Now we'll start using `git`.
+
+```sh title="Terminal"
+git init .
+```
+A _repository_ is a _directory_ that is version controlled by Git.
+
+
+   ```sh title="Terminal"
+   git add <your_file_name>
+   ```
+
+   ```sh title="Terminal"
+   git commit -m "Initial commit"
+   ```
+
+<Tabs items={["Commands", "GitHub", "Git Clients"]}>
+
+```sh tab="Commands"
+# Here are some common Git commands to review:
+
+git status   # Check the status of your repository
+git log      # View the commit history
+git branch   # List branches in your repo
+```
+
+```md tab="GitHub"
+- Create a new repository on GitHub.
+- Use `git remote add origin <repository-url>` to link your local repo.
+- Push changes:
+   ```sh title="Terminal"
+   git push -u origin main
+   ```
+```
+
+```md tab="Git Clients"
+- [Git GUIs](https://git-scm.com/downloads/guis) - Graphical interfaces for Git.
+- [Lazygit](https://github.com/jesseduffield/lazygit) - A terminal UI for Git.
+```
+
+</Tabs>
+
+
+## 📕 Learning Resources
+
+<Cards>
+<Card
+  title={"Linux Journey"}
+  description={
+    <>
+      <li>Learn the basics of different Linux features through simple step-by-step tutorials.</li>
+    </>
+  }
+  href={`https://linuxjourney.com`}
+/>
+</Cards>
+
+- [Git How To](https://githowto.com) - A step-by-step guide to learning Git.
